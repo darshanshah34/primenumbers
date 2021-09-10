@@ -37,18 +37,20 @@ public class CalculatePrimeNumbers {
 		int markedNumber = 2;
 		System.out.println("new prime is " + markedNumber);
 		//mark all as prime for now
-		for (int i =2 ; i<= maxNumber ; i++ )  {
+		for (int i =2 ; i< maxNumber ; i++ )  {
 			markedList.put(i, UN_MARKED);
 			primeList.put(i, UN_MARKED);
 		}
 		markedList.put(2, UN_MARKED);
 		int i =2;
- 		while(markedNumber <= maxNumber) {
+ 		while(markedNumber < maxNumber) {
  			markMultiples(maxNumber, markedNumber);
  			markedNumber = markedNumber + i++;
  			markedNumber = findTheSmallestLessThanP(markedList, markedNumber, maxNumber);
- 			System.out.println("new prime is " + markedNumber);
- 			primeList.put(markedNumber, MARKED);
+ 			if (markedNumber < maxNumber) {
+ 				System.out.println("new prime is " + markedNumber);
+ 				primeList.put(markedNumber, MARKED);
+ 			}
  		}
  		return primeList;
 	}
@@ -63,9 +65,9 @@ public class CalculatePrimeNumbers {
 	
 	private static int findTheSmallestLessThanP(HashMap<Integer, Boolean>  markedList, int markedMax, int maxNumber) {
 		System.out.println("findTheSmallestLessThanP markedMax " + markedMax);
-		if (markedMax >= maxNumber) {
+		if (markedMax >= maxNumber - 1) {
 			System.out.println("Need to end here");
-			return maxNumber+1;
+			return markedMax+10;
 		}
 		System.out.println("findTheSmallestLessThanP markedMax " + markedMax);
 		for (int j=2; j<=markedMax; j++)  {
@@ -74,5 +76,10 @@ public class CalculatePrimeNumbers {
 			}
 		}
 		return markedMax;
+	}
+
+	public void clearList() {
+		primeList.clear();
+		
 	}
 }
